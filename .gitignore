@@ -5,8 +5,10 @@
 
 ## Java
 target/
-test/
+
+## 忽略测试类
+test/java/com/can/
 
 
 ## SpringBoot Config
-*.yml
+application.yml

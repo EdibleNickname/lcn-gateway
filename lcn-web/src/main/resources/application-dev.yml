@@ -1,0 +1,8 @@
+# log
+logging:
+  path: C:\\Users\\LCN\\Desktop
+
+file:
+  headerPortrait: C:\\Users\\LCN\\Desktop
+  # 上面的地址在服务的映射路径
+  headerPortraitBaseUrl: C:\\Users\\LCN\\Desktop
