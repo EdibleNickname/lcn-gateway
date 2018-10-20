@@ -1,0 +1,12 @@
+
+## Idea
+.idea/
+*.iml
+
+## Java
+target/
+test/
+
+
+## SpringBoot Config
+*.yml

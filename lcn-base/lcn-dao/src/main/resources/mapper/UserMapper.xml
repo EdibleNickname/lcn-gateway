@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.can.dao.UserMapper" >
+
+  <resultMap id="BaseResultMap" type="com.can.entity.User" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="BIT" />
+    <result column="head_portraits" property="headPortraits" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="introduce" property="introduce" jdbcType="VARCHAR" />
+    <result column="last_password_reset_date" property="lastPasswordResetDate" jdbcType="TIMESTAMP" />
+    <result column="regist_date" property="registDate" jdbcType="TIMESTAMP" />
+    <result column="enable" property="enable" jdbcType="BIT" />
+  </resultMap>
+
+  <resultMap id="AllUserInfo" type="com.can.entity.User" extends="BaseResultMap">
+    <collection property="roleSet" ofType="com.can.entity.Role">
+      <id 	column="role_id" property="roleId"/>
+      <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+      <result column="role_name_zh" property="roleNameZh" jdbcType="VARCHAR" />
+    </collection>
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    user_id, user_name, password, email, sex, head_portraits, birthday, introduce,
+    last_password_reset_date, regist_date, enable
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.can.entity.User" >
+    insert into user (user_id, user_name, password,
+      email, sex, head_portraits,
+      birthday, introduce, last_password_reset_date, regist_date,
+      enable)
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{email,jdbcType=VARCHAR}, #{sex,jdbcType=BIT}, #{headPortraits,jdbcType=VARCHAR},
+      #{birthday,jdbcType=DATE}, #{introduce,jdbcType=VARCHAR},
+      #{lastPasswordResetDate,jdbcType=TIMESTAMP}, #{registDate,jdbcType=TIMESTAMP},
+      #{enable,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.can.entity.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="headPortraits != null" >
+        head_portraits,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="introduce != null" >
+        introduce,
+      </if>
+      <if test="lastPasswordResetDate != null" >
+        last_password_reset_date,
+      </if>
+      <if test="registDate != null" >
+        regist_date,
+      </if>
+      <if test="enable != null" >
+        enable,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{user_id,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=BIT},
+      </if>
+      <if test="headPortraits != null" >
+        #{headPortraits,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="introduce != null" >
+        #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="lastPasswordResetDate != null" >
+        #{lastPasswordResetDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="registDate != null" >
+        #{registDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enable != null" >
+        #{enable,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.can.entity.User" >
+    update user
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=BIT},
+      </if>
+      <if test="headPortraits != null" >
+        head_portraits = #{headPortraits,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="introduce != null" >
+        introduce = #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="lastPasswordResetDate != null" >
+        last_password_reset_date = #{lastPasswordResetDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="registDate != null" >
+        regist_date = #{registDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enable != null" >
+        enable = #{enable,jdbcType=BIT},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.can.entity.User" >
+    update user
+    set user_name = #{userName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=BIT},
+      head_portraits = #{headPortraits,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      introduce = #{introduce,jdbcType=VARCHAR},
+      last_password_reset_date = #{lastPasswordResetDate,jdbcType=TIMESTAMP},
+      regist_date = #{registDate,jdbcType=TIMESTAMP},
+      enable = #{enable,jdbcType=BIT}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+
+
+
+  <!--通过用户名查询用户相关的信息，包含权限的信息-->
+  <select id="selectAllUserInfoByUserName" parameterType="java.lang.String" resultMap="AllUserInfo">
+    SELECT u.*, r.*  FROM user u, role r
+    WHERE u.user_name = #{userName, jdbcType=VARCHAR}
+    AND r.role_id IN (
+      SELECT ru.role_id FROM role_user ru
+      WHERE ru.user_id = (
+        SELECT u.user_id FROM user u WHERE u.user_name = #{userName, jdbcType=VARCHAR}
+      )
+    );
+  </select >
+
+  <!--通过用户id查询用户的基础信息-->
+  <select id="selectUserInfoByUserId">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where user_id = #{userId, jdbcType=INTEGER}
+  </select>
+
+
+  <!--查询用户的基础信息-->
+  <select id="selectUserInfo" parameterType="com.can.entity.User" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    <where>
+      <if test="userName != null and userName !='' ">
+          and user_name = #{userName, jdbcType=VARCHAR}
+        </if>
+      <if test="email != null and email != '' ">
+          and email = #{email, jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+
+  <!--注册时查询用户名或者邮箱是否被注册过了-->
+  <select id="queryUserUnique" parameterType="com.can.entity.User" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user where user_name = #{userName, jdbcType=VARCHAR} or email = #{email, jdbcType=VARCHAR}
+  </select>
+
+  <!--查询用户id-->
+  <select id="queryUserIdByUserName" parameterType="java.lang.String" resultType="java.lang.String">
+    select user_id from user where user_name = #{userName, jdbcType=VARCHAR}
+  </select>
+
+  <!--新增用户-->
+  <insert id="userInsertSelective" parameterType="com.can.entity.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="headPortraits != null" >
+        head_portraits,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="introduce != null" >
+        introduce,
+      </if>
+      <if test="lastPasswordResetDate != null" >
+        last_password_reset_date,
+      </if>
+      <if test="registDate != null" >
+        regist_date,
+      </if>
+      <if test="enable != null" >
+        enable,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=BIT},
+      </if>
+      <if test="headPortraits != null" >
+        #{headPortraits,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="introduce != null" >
+        #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="lastPasswordResetDate != null" >
+        #{lastPasswordResetDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="registDate != null" >
+        #{registDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enable != null" >
+        #{enable,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+
+  <!--为用户添加角色-->
+  <insert id="addUserRole" >
+    insert into role_user (role_id, user_id) values (
+      (select role_id from role where role_name = #{roleName}),
+      (select user_id from user where user_name = #{userName})
+    )
+  </insert>
+
+  <!--通过用户名或者用户id选择更新用户基础信息-->
+  <update id="updateByUserNameOrUserIdSelective" parameterType="com.can.entity.User">
+    update user
+    <set>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=BIT},
+      </if>
+      <if test="headPortraits != null" >
+        head_portraits = #{headPortraits,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="introduce != null" >
+        introduce = #{introduce,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_name = #{userName,jdbcType=VARCHAR} or user_id = #{userId, jdbcType=INTEGER}
+  </update >
+
+  <!--通过用户名或者用户id查询用户信息-->
+  <select id="queryUserByUserNameOrUserId" parameterType="com.can.entity.User" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from user
+    where user_name = #{userName,jdbcType=VARCHAR} or user_id = #{userId, jdbcType=INTEGER}
+  </select>
+
+</mapper>

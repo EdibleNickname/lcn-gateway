@@ -1,0 +1,63 @@
+# 端口号
+server:
+  port: 81
+
+
+# 数据库LL
+spring:
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/lcn?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: admin
+    # 连接池
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 10
+    minIdle: 30
+    maxActive: 100
+    maxWait: 3000
+    removeAbandonedTimeout: 180
+    validationQuery: select 1 from dual
+  # reids
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    password: admin
+    timeout: 2000ms
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: 100ms
+  # 邮件模板配置
+  freemarker:
+    checkTemplateLocation: false
+  # 邮箱配置
+  mail:
+    username: youremail@163.com
+    password: yoursecretkey
+    default-encoding: UTF-8
+    host: smtp.163.com
+    port: 465
+
+# myBatis
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+
+# jwt configuration
+jwt:
+  secret: MySecret
+  header: Authorization
+  # 混淆作用，拼接在token的前面
+  tokenPrefix: lcn
+  # token 默认过期的时间: 一个月
+  expiration: 2592000
+  route:
+    authentication:
+      path: /auth/**
+      refresh: refresh
+      register: /auth/register
