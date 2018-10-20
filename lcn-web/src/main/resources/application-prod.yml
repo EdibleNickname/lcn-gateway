@@ -1,0 +1,9 @@
+# log
+logging:
+  path: /opt/project/log
+
+# 本地图片地址和url的映射
+file:
+  headerPortrait: /opt/project/imgs
+  # 上面的地址在服务的映射路径 注意2个后面不要有/
+  headerPortraitBaseUrl: http://licanxin.com/imgs

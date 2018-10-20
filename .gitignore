@@ -1,0 +1,14 @@
+
+## Idea
+.idea/
+*.iml
+
+## Java
+target/
+
+## 忽略测试类
+test/java/com/can/
+
+
+## SpringBoot Config
+application.yml
