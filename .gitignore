@@ -1,4 +1,4 @@
-
+﻿
 ## Idea
 .idea/
 *.iml
@@ -7,8 +7,8 @@
 target/
 
 ## 忽略测试类
-test/java/com/can/
+lcn-web/src/test
 
 
 ## SpringBoot Config
-application.yml
+*.yml
