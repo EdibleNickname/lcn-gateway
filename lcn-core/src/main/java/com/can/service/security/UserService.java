@@ -4,7 +4,7 @@ package com.can.service.security;
 import com.can.entity.User;
 
 /**
- * @description:
+ * @description: 提供给Spring-Security查询用户的接口实现类
  * @author: LCN
  * @date: 2018-05-20 22:44
  */

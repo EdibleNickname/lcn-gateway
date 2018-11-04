@@ -1,6 +1,5 @@
 package com.can.service.auth.reader.personalInfo.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.can.dao.UserMapper;
 import com.can.entity.User;
@@ -18,7 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import java.io.*;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,11 +55,10 @@ public class PersonalInfoServiceImpl implements PersonalInfoService {
 	@Override
 	public Response<Map<String, String>> updateBaseInfo(UserDto userDto) {
 
-		log.info("需要更新的用户基础信息--------->{}", JSON.toJSONString(userDto));
-
-		Map<String, String> map = new HashMap<>(16);
+		Map<String, String> map = new HashMap<>(4);
 		Response<Map<String, String>> response = new Response<>();
-
+		map.put("isSuccess", "0");
+		response.setResult(map);
 
 		User user = new User();
 		BeanUtils.copyProperties(userDto, user);
@@ -71,17 +69,12 @@ public class PersonalInfoServiceImpl implements PersonalInfoService {
 
 			if(result != 1) {
 				log.info("更新用户-----{}----基础信息失败", user.getUserName());
-				map.put("isSuccess", "0");
-				response.setResult(map);
-				log.info("返回结果================>{}", JSON.toJSONString(response));
 				return response;
 			}
 
 			log.info("更新用户-----{}----基础信息成功", user.getUserName());
 			map.put("isSuccess", "1");
-			map.put("userId", userMapper.queryUserIdByUserName(user.getUserName()));
-			response.setResult(map);
-			log.info("返回结果================>{}", JSON.toJSONString(response));
+			map.put("userId", userMapper.selectUserIdByUserName(user.getUserName()));
 			return response;
 		}
 
@@ -91,44 +84,30 @@ public class PersonalInfoServiceImpl implements PersonalInfoService {
 		map.put("isSuccess", "1");
 		map.put("redisKey", redisKey);
 		response.setResult(map);
-		log.info("返回结果================>{}", JSON.toJSONString(response));
 		return response;
 	}
 
 	@Override
 	public Response<Map<String, String>> updateHeaderPortrait(MultipartFile file, String redisKey) {
 
-		log.info("用户提交的redisKey为------------>{}", redisKey);
-
-		Map<String, String> map = new HashMap<>(16);
+		Map<String, String> map = new HashMap<>(4);
 		Response<Map<String, String>> response = new Response<>();
+		map.put("isSuccess", "0");
+		response.setResult(map);
 
-		if(StringUtils.isEmpty(redisKey)) {
-			log.info("用户提交的redisKey为空");
-			map.put("isSuccess", "0");
-			response.setResult(map);
-			log.info("返回结果================>{}", JSON.toJSONString(response));
-			return response;
-		}
 		// 从缓存中获取对象
 		User user = (User)redisUtil.get(redisKey);
 
 		// 对象不存在
 		if (user == null) {
 			log.info("用户提交的redisKey获取的用户基础信息为空");
-			map.put("isSuccess", "0");
-			response.setResult(map);
-			log.info("返回结果================>{}", JSON.toJSONString(response));
 			return response;
 		}
 
-		User oldUser = userMapper.queryUserByUserNameOrUserId(user);
+		User oldUser = userMapper.selectUserByUserNameOrUserId(user);
 		if(oldUser == null) {
 			log.info("需要更新的用户不存在,查询的条件---->{}", JSONObject.toJSONString(user));
-			map.put("isSuccess", "0");
 			map.put("hint", "用户不存在");
-			response.setResult(map);
-			log.info("返回结果================>{}", JSON.toJSONString(response));
 			return response;
 		}
 
@@ -145,10 +124,7 @@ public class PersonalInfoServiceImpl implements PersonalInfoService {
 				// 上传了头像
 				String filePath = FileUtils.saveFile(basePath, HEADER_PORTRAIT_PATH, file);
 				if(StringUtils.isEmpty(filePath)) {
-					map.put("isSuccess", "0");
 					map.put("hint", "更新用户头像失败");
-					response.setResult(map);
-					log.info("返回结果================>{}", JSON.toJSONString(response));
 					return response;
 				}
 
@@ -156,10 +132,7 @@ public class PersonalInfoServiceImpl implements PersonalInfoService {
 
 				// 服务器的路径映射地址没有设置
 				if (StringUtils.isEmpty(headerPortraitBaseUrl)) {
-					map.put("isSuccess", "0");
 					map.put("hint", "服务器未设置路径映射地址");
-					response.setResult(map);
-					log.info("返回结果================>{}", JSON.toJSONString(response));
 					return response;
 				}
 
@@ -178,21 +151,16 @@ public class PersonalInfoServiceImpl implements PersonalInfoService {
 
 		if(result != 1) {
 			log.info("更新用户-----{}----基础信息失败", user.getUserName());
-			map.put("isSuccess", "0");
 			map.put("hint", "更新用户基础信息失败");
-			response.setResult(map);
-			log.info("返回结果================>{}", JSON.toJSONString(response));
 			return response;
 		}
 
 		log.info("更新用户-----{}----基础信息成功", user.getUserName());
 		map.put("isSuccess", "1");
 		map.put("path", user.getHeadPortraits());
-		map.put("userId", userMapper.queryUserIdByUserName(user.getUserName()));
+		map.put("userId", userMapper.selectUserIdByUserName(user.getUserName()));
 		response.setResult(map);
-		log.info("返回结果================>{}", JSON.toJSONString(response));
 		return response;
 	}
-
 
 }

@@ -1,11 +1,13 @@
 package com.can.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.Set;
 
 @Data
+@NoArgsConstructor
 public class User {
 
     private Integer userId;

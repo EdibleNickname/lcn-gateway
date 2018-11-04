@@ -2,6 +2,7 @@ package com.can.service.open.common;
 
 import com.can.model.CaptchaDto;
 import com.can.response.Response;
+import com.can.utils.enums.CaptchaValidateEnum;
 
 import java.io.IOException;
 
@@ -22,4 +23,12 @@ public interface CaptchaService {
 	 */
 	Response<CaptchaDto> generateCaptcha(Long expireTime) throws IOException;
 
+	/**
+	 * 验证验证码是否正确
+	 *
+	 * @param captcha 验证码
+	 * @param redis	   存放在redis中的key
+	 * @return
+	 */
+	CaptchaValidateEnum validCaptcha(String captcha, String redis);
 }

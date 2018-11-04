@@ -196,31 +196,39 @@
     where user_id = #{userId, jdbcType=INTEGER}
   </select>
 
-
-  <!--查询用户的基础信息-->
-  <select id="selectUserInfo" parameterType="com.can.entity.User" resultMap="BaseResultMap">
+  <!--通过用户名查询用户信息-->
+  <select id="selectUserByUserName" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from user
     <where>
       <if test="userName != null and userName !='' ">
-          and user_name = #{userName, jdbcType=VARCHAR}
-        </if>
+        and user_name = #{userName, jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+
+  <!-- 通过用户邮箱查询用户 -->
+  <select id="selectUserByEmail" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    <where>
       <if test="email != null and email != '' ">
-          and email = #{email, jdbcType=VARCHAR}
+        and email = #{email, jdbcType=VARCHAR}
       </if>
     </where>
   </select>
 
   <!--注册时查询用户名或者邮箱是否被注册过了-->
-  <select id="queryUserUnique" parameterType="com.can.entity.User" resultMap="BaseResultMap">
+  <select id="selectUserUnique" parameterType="com.can.entity.User" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from user where user_name = #{userName, jdbcType=VARCHAR} or email = #{email, jdbcType=VARCHAR}
   </select>
 
   <!--查询用户id-->
-  <select id="queryUserIdByUserName" parameterType="java.lang.String" resultType="java.lang.String">
+  <select id="selectUserIdByUserName" parameterType="java.lang.String" resultType="java.lang.String">
     select user_id from user where user_name = #{userName, jdbcType=VARCHAR}
   </select>
 
@@ -322,7 +330,7 @@
   </update >
 
   <!--通过用户名或者用户id查询用户信息-->
-  <select id="queryUserByUserNameOrUserId" parameterType="com.can.entity.User" resultMap="BaseResultMap">
+  <select id="selectUserByUserNameOrUserId" parameterType="com.can.entity.User" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
     from user

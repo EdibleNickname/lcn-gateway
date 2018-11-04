@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 
 /**
- * @description: 
+ * @description: 提供给Spring-Security查询用户的接口实现类
  *
  * @author: LCN
  * @date: 2018-05-20 22:45

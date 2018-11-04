@@ -1,12 +1,13 @@
 package com.can.service.open.common.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.can.model.CaptchaDto;
 import com.can.redis.util.RedisUtil;
 import com.can.response.Response;
 import com.can.service.open.common.CaptchaService;
+import com.can.utils.enums.CaptchaValidateEnum;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -62,10 +63,30 @@ public class CaptchaServiceImpl implements CaptchaService {
 
 		Response<CaptchaDto> response = new Response<>();
 		response.setResult(captchaDto);
-
-		log.info("返回的数据--------->{}", JSON.toJSONString(response));
-
 		return response;
+	}
+
+
+	@Override
+	public CaptchaValidateEnum validCaptcha(String captcha, String redisKey) {
+
+		String captchaAnswer = (String)redisUtil.get(redisKey);
+		log.info("从redis中获取的结果---------->{}", captchaAnswer);
+
+		// 验证码答案不能为空
+		if(StringUtils.isEmpty(captchaAnswer)) {
+			log.info("验证码错误,原因------->验证码不存在");
+			return CaptchaValidateEnum.NO_EXIST;
+		}
+
+		// 验证码答案不正确
+		if(!captchaAnswer.equals(captcha)) {
+			log.info("验证码错误,原因------->答案错误");
+			return CaptchaValidateEnum.ERROR;
+		}
+
+		log.info("验证码成功");
+		return CaptchaValidateEnum.CORRECT;
 	}
 
 }

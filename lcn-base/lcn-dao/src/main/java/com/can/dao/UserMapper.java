@@ -34,11 +34,18 @@ public interface UserMapper {
     User selectUserInfoByUserId(int userId);
 
     /**
-     * 查询用户的基础信息(现在支持用户名和邮箱查询)
-     * @param userInfo
+     * 通过用户名查询用户信息
+     * @param userName
      * @return
      */
-    User selectUserInfo(User userInfo);
+    User selectUserByUserName(String userName);
+
+    /**
+     * 通过邮箱查询用户信息
+     * @param email
+     * @return
+     */
+    User selectUserByEmail(String email);
 
     /**
      * 查询用户名或者邮箱是否被注册过了
@@ -46,7 +53,7 @@ public interface UserMapper {
      * @param userInfo
      * @return
      */
-    List<User> queryUserUnique(User userInfo);
+    List<User> selectUserUnique(User userInfo);
 
     /**
      * 新增用户
@@ -78,12 +85,12 @@ public interface UserMapper {
      * @param userName 用户名
      * @return
      */
-    String queryUserIdByUserName(String userName);
+    String selectUserIdByUserName(String userName);
 
     /**
      * 通过用户名或者用户id查询用户信息
      * @param user
      * @return
      */
-    User queryUserByUserNameOrUserId(User user);
+    User selectUserByUserNameOrUserId(User user);
 }

@@ -1,9 +1,12 @@
 package com.can.controller.open;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.can.model.UserDto;
 import com.can.response.Response;
 import com.can.service.open.register.RegisterService;
 import com.can.service.open.register.RegisterService.RegisterGroup;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +20,7 @@ import java.util.Map;
  * @date: 2018-06-26 17:08
  */
 
+@Slf4j
 @RestController
 @RequestMapping("/open/register")
 public class RegisterController {
@@ -27,20 +31,24 @@ public class RegisterController {
 	@GetMapping("/queryUserNameIsExist/{userName}")
 	public Response<Boolean> queryUserNameIsExist(@PathVariable("userName") String userName) {
 
+		log.info("查询用户名是否存在请求参数---------->{}", userName);
 		Response<Boolean> response = registerService.queryUserNameIsExist(userName);
+
+		log.info("查询用户名是否存在返回结果================>{}", JSON.toJSONString(response));
 		return response;
 	}
 
 	/**
 	 * 把邮箱参数放到前面的原因：邮箱多以com结尾，拼接在后面会导致spring-boot截取后面的.com然后处理完
 	 * 跳转到邮箱.com前面的页面，但是项目中没有这个页面，所以报错了
-	 * @param email
-	 * @return
 	 */
 	@GetMapping("{email}/queryEmailIsExist")
 	public Response<Boolean> queryEMailIsExist(@PathVariable("email") String email) {
 
+		log.info("查询邮箱是否存在请求参数---------->{}", email);
 		Response<Boolean> response = registerService.queryEmailIsExist(email);
+
+		log.info("查询邮箱是否存在返回结果================>{}", JSON.toJSONString(response));
 		return response;
 	}
 
@@ -56,7 +64,12 @@ public class RegisterController {
 	public Response<Map<String, String>> validCaptcha(@PathVariable("captcha")String captcha,
 		@PathVariable("email")String email, @PathVariable("redisKey")String redisKey) {
 
+		log.info("用户注册验证验证是否正确请求参数---------->验证码：{}, redisKey:{}, 邮箱:{}", captcha,
+			redisKey, email);
+
 		Response<Map<String, String>> response = registerService.validCaptcha(captcha, email, redisKey);
+
+		log.info("用户注册验证验证是否正确返回结果===================>{}", JSONObject.toJSONString(response));
 		return response;
 	}
 
@@ -67,8 +80,13 @@ public class RegisterController {
 	 * @return
 	 */
 	@PostMapping("/registerUser")
-	public Response<Map<String, String>> registerUser(HttpServletResponse httpResponse, @Validated({RegisterGroup.class})@RequestBody UserDto userDto) {
+	public Response<Map<String, String>> registerUser(HttpServletResponse httpResponse,
+		@Validated({RegisterGroup.class})@RequestBody UserDto userDto) {
+
+		log.info("用户注册的请求参数--------->{}", JSON.toJSONString(userDto));
 		Response<Map<String, String>> response = registerService.registerUser(httpResponse, userDto);
+
+		log.info("用户注册返回结果================>{}", JSON.toJSONString(response));
 		return response;
 	}
 
