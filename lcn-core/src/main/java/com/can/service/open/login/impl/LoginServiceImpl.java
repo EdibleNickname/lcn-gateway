@@ -2,6 +2,7 @@ package com.can.service.open.login.impl;
 
 import com.can.dao.UserMapper;
 import com.can.entity.User;
+import com.can.redis.util.RedisUtil;
 import com.can.response.Response;
 import com.can.security.utils.JwtTokenUtil;
 import com.can.service.open.common.CaptchaService;
@@ -40,6 +41,10 @@ public class LoginServiceImpl implements LoginService {
 	@Resource
 	private JwtTokenUtil jwtTokenUtil;
 
+	@Resource
+	private RedisUtil redisUtil;
+
+
 	/** 默认token过期的时间 */
 	@Value("${jwt.expiration:2592000}")
 	private Long tokenExpireTime;
@@ -64,8 +69,8 @@ public class LoginServiceImpl implements LoginService {
 			return response;
 		}
 
-		String encodePw = passwordEncoder.encode(password);
-		if(!encodePw.equals(user.getPassword())) {
+		if(!passwordEncoder.matches(password, user.getPassword())) {
+
 			log.info("用户登录失败-------->密码错误");
 			return response;
 		}
