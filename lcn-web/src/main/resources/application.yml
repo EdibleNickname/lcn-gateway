@@ -44,6 +44,12 @@ spring:
     host: smtp.163.com
     port: 465
 
+#定时器
+timer:
+    job:
+      # 定时器实现类存放的包路径(尽量具体一点，越具体性能越高)
+      basePackage: com.can.task
+      
 # myBatis
 mybatis:
   mapper-locations: classpath*:mapper/*.xml
