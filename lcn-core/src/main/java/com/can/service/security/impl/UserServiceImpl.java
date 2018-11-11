@@ -33,5 +33,5 @@ public class UserServiceImpl implements UserService {
 		log.info("查询结果--------------->", JSON.toJSONString(user));
 		return user;
 	}
-
+	
 }

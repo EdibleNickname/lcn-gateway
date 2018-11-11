@@ -1,6 +1,6 @@
 package com.can.web.init;
 
-import com.can.quqrtz.JobManager;
+import com.can.configuration.quqrtz.JobManager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
@@ -25,14 +25,14 @@ public class WebTimerInit implements ApplicationRunner {
 	@Resource
 	private JobManager jobManager;
 
-	@Value("${timer.job.backPackage:com.can.task}")
+	@Value("${timer.job.backPackage:com.can.timer.job}")
 	private String basePackage;
 
 	@Async
 	@Override
 	public void run(ApplicationArguments args) {
 
-		int jobNum = jobManager.getTaskList("com.can.task");
+		int jobNum = jobManager.getTaskList(basePackage);
 
 		if (jobNum == 0) {
 			log.info("没有定时任务需要执行");

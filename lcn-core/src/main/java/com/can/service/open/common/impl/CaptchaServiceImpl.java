@@ -1,10 +1,10 @@
 package com.can.service.open.common.impl;
 
+import com.can.configuration.redis.util.RedisUtil;
+import com.can.data.enums.CaptchaValidateEnum;
 import com.can.model.CaptchaDto;
-import com.can.redis.util.RedisUtil;
 import com.can.response.Response;
 import com.can.service.open.common.CaptchaService;
-import com.can.utils.enums.CaptchaValidateEnum;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

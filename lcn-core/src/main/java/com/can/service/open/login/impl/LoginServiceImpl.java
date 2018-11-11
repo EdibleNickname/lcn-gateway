@@ -1,13 +1,13 @@
 package com.can.service.open.login.impl;
 
+import com.can.configuration.redis.util.RedisUtil;
+import com.can.configuration.security.utils.JwtTokenUtil;
 import com.can.dao.UserMapper;
+import com.can.data.enums.CaptchaValidateEnum;
 import com.can.entity.User;
-import com.can.redis.util.RedisUtil;
 import com.can.response.Response;
-import com.can.security.utils.JwtTokenUtil;
 import com.can.service.open.common.CaptchaService;
 import com.can.service.open.login.LoginService;
-import com.can.utils.enums.CaptchaValidateEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;

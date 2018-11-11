@@ -1,8 +1,8 @@
 package com.can.service.open.common;
 
+import com.can.data.enums.CaptchaValidateEnum;
 import com.can.model.CaptchaDto;
 import com.can.response.Response;
-import com.can.utils.enums.CaptchaValidateEnum;
 
 import java.io.IOException;
 

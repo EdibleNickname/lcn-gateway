@@ -2,13 +2,13 @@ package com.can.service.auth.reader.personalInfo.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.can.dao.UserMapper;
+import com.can.data.Constant;
 import com.can.entity.User;
 import com.can.model.UserDto;
-import com.can.redis.util.RedisUtil;
+import com.can.configuration.redis.util.RedisUtil;
 import com.can.response.Response;
 import com.can.service.auth.reader.personalInfo.PersonalInfoService;
-import com.can.utils.Constant;
-import com.can.utils.FileUtils;
+import com.can.util.FileUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;

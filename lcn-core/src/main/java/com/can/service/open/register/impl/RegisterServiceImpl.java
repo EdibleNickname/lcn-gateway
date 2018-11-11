@@ -1,18 +1,18 @@
 package com.can.service.open.register.impl;
 
+import com.can.configuration.redis.util.RedisUtil;
+import com.can.configuration.security.utils.JwtTokenUtil;
 import com.can.dao.UserMapper;
+import com.can.data.enums.CaptchaValidateEnum;
 import com.can.entity.User;
 import com.can.model.UserDto;
-import com.can.redis.util.RedisUtil;
 import com.can.response.Response;
-import com.can.security.utils.JwtTokenUtil;
 import com.can.service.open.common.CaptchaService;
 import com.can.service.open.register.RegisterService;
 import com.can.util.email.EmailUtil;
 import com.can.util.email.model.Email;
 import com.can.util.random.RandomUtil;
 import com.can.util.regex.RegexUtil;
-import com.can.utils.enums.CaptchaValidateEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
