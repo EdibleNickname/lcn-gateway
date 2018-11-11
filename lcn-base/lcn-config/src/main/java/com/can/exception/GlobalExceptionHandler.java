@@ -3,7 +3,6 @@ package com.can.exception;
 import com.can.exception.type.AuthenticationException;
 import com.can.response.Response;
 import com.can.response.enums.ResponseEnum;
-import com.can.util.validation.exception.AssertException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.validation.FieldError;
@@ -64,15 +63,6 @@ public class GlobalExceptionHandler {
 
 			response.setCode(ResponseEnum.PARAMETER_ERROR.getCode());
 			response.setMessage(ResponseEnum.PARAMETER_ERROR.getMessage());
-			response.setResult(map);
-			return response;
-		}
-
-		if (exception instanceof AssertException) {
-			AssertException ex = (AssertException)exception;
-			response.setCode(ResponseEnum.PARAMETER_ERROR.getCode());
-			response.setMessage(ResponseEnum.PARAMETER_ERROR.getMessage());
-			map.put(MSG_KEY, ex.getMessage());
 			response.setResult(map);
 			return response;
 		}

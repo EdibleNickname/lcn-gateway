@@ -23,6 +23,7 @@
         <druid.version>1.1.9</druid.version>
         <hibernate.validator.version>6.0.10.Final</hibernate.validator.version>
         <kaptcha.version>2.3.2</kaptcha.version>
+        <quartz>2.3.0</quartz>
 
         <lcn.common.version>1.0-SNAPSHOT</lcn.common.version>
     </properties>
@@ -77,6 +78,12 @@
                 <version>${kaptcha.version}</version>
             </dependency>
 
+            <!--quartz定时器-->
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz</artifactId>
+                <version>${quartz.version}</version>
+            </dependency>
 
 
 

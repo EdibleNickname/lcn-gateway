@@ -11,7 +11,7 @@ import com.can.service.open.register.RegisterService;
 import com.can.util.email.EmailUtil;
 import com.can.util.email.model.Email;
 import com.can.util.random.RandomUtil;
-import com.can.util.validation.AssertUtil;
+import com.can.util.regex.RegexUtil;
 import com.can.utils.enums.CaptchaValidateEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -93,11 +93,13 @@ public class RegisterServiceImpl implements RegisterService {
 	@Cacheable(value = "queryEMailIsExist", key = "#email")
 	public Response<Boolean> queryEmailIsExist(String email) {
 
-		// 判断邮箱格式
-		AssertUtil.isEmail(email, "邮箱格式不正确");
-
 		Response<Boolean> response = new Response<>();
 		response.setResult(false);
+
+		if(RegexUtil.isEmail(email)) {
+			log.info("邮箱格式不正确");
+			return response;
+		}
 
 		User user = userMapper.selectUserByEmail(email);
 

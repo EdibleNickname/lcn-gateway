@@ -17,7 +17,6 @@ import java.util.Properties;
 @Configuration
 public class KaptchaConfig {
 
-
 	@Bean
 	public DefaultKaptcha producer() {
 

@@ -76,6 +76,13 @@
             <version>${kaptcha.version}</version>
         </dependency>
 
+        <!--定时器-->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+        </dependency>
+
+
         <dependency>
             <groupId>com.can</groupId>
             <artifactId>lcn-common</artifactId>
