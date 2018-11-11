@@ -48,7 +48,7 @@ spring:
 timer:
     job:
       # 定时器实现类存放的包路径(尽量具体一点，越具体性能越高)
-      basePackage: com.can.task
+      basePackage: com.can.timer.job
       
 # myBatis
 mybatis:
