@@ -17,7 +17,7 @@ import java.util.Date;
  * @date: 2018-11-11 16:39
  */
 
-@JobAnno(jobName = JobNameConstant.DEMO_JOB,  cron = "0/10 * * * * ? *")
+@JobAnno(jobName = JobNameConstant.DEMO_JOB,  cron = "0/10 * * * * ? *", actived = false)
 public class DemoJob implements Job {
 
 	@Reference

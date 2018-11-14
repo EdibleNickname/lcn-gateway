@@ -2,10 +2,17 @@
 server:
   port: 81
 
-# 数据库
 spring:
+  # 配置文件
   profiles:
     active: dev
+  # 热部署
+  # 1. idea开启热部署需要 Settings->Compiler->Build Project automatically勾上
+  # 2. ctrl + shift + alt + /， 选择Registry 把 Compiler autoMake allow when app running勾上
+  devtools:
+    restart:
+      enabled: true
+  # 数据库
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/lcn?useUnicode=true&characterEncoding=utf-8&useSSL=false
@@ -37,8 +44,8 @@ spring:
     checkTemplateLocation: false
   # 邮箱配置
   mail:
-    username: yourEmailAdress
-    password: yourSecretKey
+    username: licanxin233@163.com
+    password: ubxirrbxxzzvebj1
     default-encoding: UTF-8
     host: smtp.163.com
     port: 465
@@ -48,7 +55,7 @@ timer:
   job:
     # 定时器实现类存放的包路径(尽量具体一点，越具体性能越高)
     basePackage: com.can.timer.job
-      
+
 # myBatis
 mybatis:
   mapper-locations: classpath*:mapper/*.xml
@@ -67,8 +74,6 @@ jwt:
       refresh: refresh
       register: /auth/register
 
-
-
 dubbo:
   # 应用描述
   application:
@@ -78,5 +83,5 @@ dubbo:
   registry:
     id: lcn-rpc-consumer
     protocol: zookeeper
-    address: 
+    address: localhost
     port: 2181
