@@ -24,6 +24,17 @@
         </dependency>
 
         <dependency>
+            <groupId>com.alibaba.boot</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
+            <version>0.2.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.can</groupId>
+            <artifactId>rpc-provider</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.can</groupId>
             <artifactId>lcn-config</artifactId>
         </dependency>

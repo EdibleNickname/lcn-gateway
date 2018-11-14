@@ -2,8 +2,7 @@
 server:
   port: 81
 
-
-# 数据库LL
+# 数据库
 spring:
   profiles:
     active: dev
@@ -11,7 +10,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/lcn?useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
-    password: admin
+    password: 123456
     # 连接池
     type: com.alibaba.druid.pool.DruidDataSource
     initialSize: 10
@@ -25,7 +24,7 @@ spring:
     database: 0
     host: localhost
     port: 6379
-    password: admin
+    password: 123456
     timeout: 2000ms
     jedis:
       pool:
@@ -38,17 +37,17 @@ spring:
     checkTemplateLocation: false
   # 邮箱配置
   mail:
-    username: youremail@163.com
-    password: yoursecretkey
+    username: yourEmailAdress
+    password: yourSecretKey
     default-encoding: UTF-8
     host: smtp.163.com
     port: 465
 
 #定时器
 timer:
-    job:
-      # 定时器实现类存放的包路径(尽量具体一点，越具体性能越高)
-      basePackage: com.can.timer.job
+  job:
+    # 定时器实现类存放的包路径(尽量具体一点，越具体性能越高)
+    basePackage: com.can.timer.job
       
 # myBatis
 mybatis:
@@ -67,3 +66,17 @@ jwt:
       path: /auth/**
       refresh: refresh
       register: /auth/register
+
+
+
+dubbo:
+  # 应用描述
+  application:
+    id: dubbo-consumer-demo
+    name: dubbo-consumer-demo
+  # 注册中心
+  registry:
+    id: lcn-rpc-consumer
+    protocol: zookeeper
+    address: 
+    port: 2181

@@ -7,9 +7,9 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableAsync
-@SpringBootApplication
 @MapperScan("com.can.dao")
 @EnableTransactionManagement
+@SpringBootApplication
 public class ApplicationLauncher {
 
 	public static void main(String[] args) {
