@@ -24,6 +24,7 @@
         <hibernate.validator.version>6.0.10.Final</hibernate.validator.version>
         <kaptcha.version>2.3.2</kaptcha.version>
         <quartz>2.3.0</quartz>
+        <dubbo.starter.version>0.2.0</dubbo.starter.version>
 
         <lcn.common.version>1.0-SNAPSHOT</lcn.common.version>
     </properties>
@@ -85,10 +86,11 @@
                 <version>${quartz.version}</version>
             </dependency>
 
+            <!--dubbo服务-->
             <dependency>
                 <groupId>com.alibaba.boot</groupId>
                 <artifactId>dubbo-spring-boot-starter</artifactId>
-                <version>0.2.0</version>
+                <version>${dubbo.starter.version}</version>
             </dependency>
 
 

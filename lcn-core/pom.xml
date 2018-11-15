@@ -23,22 +23,23 @@
             <artifactId>commons-lang3</artifactId>
         </dependency>
 
+        <!--dubbo服务-->
         <dependency>
             <groupId>com.alibaba.boot</groupId>
             <artifactId>dubbo-spring-boot-starter</artifactId>
-            <version>0.2.0</version>
         </dependency>
 
+        <!-- provider-api -->
         <dependency>
             <groupId>com.can</groupId>
             <artifactId>rpc-provider</artifactId>
         </dependency>
 
+        <!--子模块-->
         <dependency>
             <groupId>com.can</groupId>
             <artifactId>lcn-config</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.can</groupId>
             <artifactId>lcn-provider</artifactId>

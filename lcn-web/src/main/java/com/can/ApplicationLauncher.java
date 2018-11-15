@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableAsync
 @MapperScan("com.can.dao")
-@EnableTransactionManagement
 @SpringBootApplication
+@EnableTransactionManagement
 public class ApplicationLauncher {
 
 	public static void main(String[] args) {
