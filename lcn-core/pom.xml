@@ -29,6 +29,12 @@
             <artifactId>dubbo-spring-boot-starter</artifactId>
         </dependency>
 
+        <!--Actuator监控-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
         <!-- provider-api -->
         <dependency>
             <groupId>com.can</groupId>

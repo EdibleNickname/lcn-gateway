@@ -2,6 +2,23 @@
 server:
   port: 81
 
+# actuator 监控配置
+management:
+  server:
+    port: 8081
+  endpoints:
+    web:
+      # 请求的根路径 不配置这个会被spring-security拦截
+      base-path: /open
+      # 暴露所有的端点
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      mail:
+        enabled: false
+      show-details: always
+
 spring:
   # 配置文件
   profiles:
@@ -39,6 +56,18 @@ spring:
         max-idle: 8
         min-idle: 0
         max-wait: 100ms
+  #rabbitMq
+  rabbitmq:
+    addresses: localhost
+    port: 5672
+    username: demo
+    password: 123456
+    # 消息消费结果是否回调
+    publisher-confirms: true
+    virtual-host: /
+    listener:
+      simple:
+        acknowledge-mode: manual
   # 邮件模板配置
   freemarker:
     checkTemplateLocation: false
@@ -47,8 +76,8 @@ spring:
     username: licanxin233@163.com
     password: ubxirrbxxzzvebj1
     default-encoding: UTF-8
-    host: smtp.163.com
-    port: 465
+  #  host: smtp.163.com
+  #  port: 465
 
 #定时器
 timer:
